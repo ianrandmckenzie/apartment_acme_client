@@ -63,11 +63,6 @@ module ApartmentAcmeClient
         # A virtual host using mix of IP-, name-, and port-based configuration
         #
 
-        upstream app {
-            # Path to Unicorn SOCK file, as defined previously
-            server unix:<%= options[:socket_path] %> fail_timeout=0;
-        }
-
         server {
 
             # FOR HTTP
@@ -75,19 +70,17 @@ module ApartmentAcmeClient
 
             gzip on;
 
+            # Forked custom settings:
+            passenger_enabled on;
+            passenger_app_env production;
+            client_max_body_size 20M;
+            passenger_ruby creative_devops/.rbenv/versions/2.5.1/bin/ruby;
+
             # Application root, as defined previously
             root <%= options[:public_folder] %>;
             server_name  <%= options[:base_domain] %> *.<%= options[:base_domain] %>;
 
             try_files $uri/index.html $uri @app;
-
-            location @app {
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-FORWARDED-PROTO $scheme;
-                proxy_set_header Host $http_host;
-                proxy_redirect off;
-                proxy_pass http://app;
-            }
 
             error_page 500 502 503 504 /500.html;
             client_max_body_size 4G;
