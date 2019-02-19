@@ -74,13 +74,11 @@ module ApartmentAcmeClient
             passenger_enabled on;
             passenger_app_env production;
             client_max_body_size 20M;
-            passenger_ruby creative_devops/.rbenv/versions/2.5.1/bin/ruby;
+            passenger_ruby /home/creative_devops/.rbenv/versions/2.5.1/bin/ruby;
 
             # Application root, as defined previously
             root <%= options[:public_folder] %>;
             server_name  <%= options[:base_domain] %> *.<%= options[:base_domain] %>;
-
-            try_files $uri/index.html $uri @app;
 
             error_page 500 502 503 504 /500.html;
             keepalive_timeout 10;
