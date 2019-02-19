@@ -83,7 +83,6 @@ module ApartmentAcmeClient
             try_files $uri/index.html $uri @app;
 
             error_page 500 502 503 504 /500.html;
-            client_max_body_size 4G;
             keepalive_timeout 10;
 
             # BELOW THIS LINE FOR HTTPS
