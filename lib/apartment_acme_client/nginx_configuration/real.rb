@@ -30,9 +30,9 @@ module ApartmentAcmeClient
 
       def filled_template
         return nil unless check_configuration
+
         fill_template(read_template, @options)
       end
-
 
       def default_options
         result = {}
@@ -59,9 +59,9 @@ module ApartmentAcmeClient
 
       def default_template
         <<~THE_END
-        #
-        # A virtual host using mix of IP-, name-, and port-based configuration
-        #
+          #
+          # A virtual host using mix of IP-, name-, and port-based configuration
+          #
 
         server {
 
@@ -95,16 +95,14 @@ module ApartmentAcmeClient
 
             ssl_stapling on;
             ssl_stapling_verify on;
-            ssl_trusted_certificate <%= options[:certificate_storage_folder] %>/<%= options[:cert_prefix] %>fullchain.pem;
 
             ssl_session_timeout 5m;
             <% end %>
-        }
+          }
         THE_END
       end
 
       def fill_template(template, options)
-
         # scope defined for use in binding to ERB
         def opts(options)
           options

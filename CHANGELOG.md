@@ -1,5 +1,20 @@
 # Future features
 
+# 0.0.6
+
+* Add small delay between DNS update and LetsEncrypt authorization request
+* Add some more detailed logging during renewal sequence
+
+# 0.0.5
+
+* Fix ACMEv2 client integration with http validation
+
+# 0.0.4 [broken]
+
+* Use ACMEv2 client
+* Enable provisioning Wildcard certificate
+* Use AWS Route53 API for creating wildcard certificate
+
 # 0.0.3
 
 * Allow Rails 5.2.x
